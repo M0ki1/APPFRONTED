@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 }));
 
-let email = "audie_johns@schuppe.name";
+let email = "admin@admin.com";
 
 const GET_DATA = gql`
 query {

@@ -6,7 +6,7 @@ import theme from "../../theme";
 function HomePage(props) {
   return (
     <Box>
-        < SpinnerOfDoom color={'primary.main'} />
+        
     </Box>
   );
 }
