@@ -2,7 +2,7 @@ import './App.css';
 import {
     HashRouter,
     Route,
-    Routes
+    Routes,
 } from "react-router-dom";
 import React from "react";
 import TripsPage from "./components/TripsPage";
@@ -17,41 +17,44 @@ let base64 = require('base-64');
 
 
 
-const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const payload = {
-        email: data.get("email"),
-        password: data.get("password"),
-    };
-    fetch("http://localhost:3000/api/v1/api-keys", {
-            method: "post",
-            headers: new Headers({
-                "Authorization": `Basic ${base64.encode(`${payload.email}:${payload.password}`)}`
-            }),
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.text().then(errorText => {
-                    throw new Error(`Request failed with status ${response.status}: ${errorText}`);
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            localStorage.setItem("token",data.token);
-            return (<App/>)
 
-        })
-        .catch(error => {
-            alert("revisa tus weas")
-        });
-}
 
 
 function App() {
     const isAuthenticated = localStorage.getItem("token") !== null;
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const payload = {
+            email: data.get("email"),
+            password: data.get("password"),
+        };
+        fetch("http://localhost:3000/api/v1/api-keys", {
+                method: "post",
+                headers: new Headers({
+                    "Authorization": `Basic ${base64.encode(`${payload.email}:${payload.password}`)}`
+                }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorText => {
+                        throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                localStorage.setItem("token",data.token);
+                window.location.href = "/trips";
+                
+
+            })
+            .catch(error => {
+                alert(error)
+                console.log(error)
+            });
+    }
     return (
 
         isAuthenticated ? 
@@ -71,7 +74,17 @@ function App() {
         </HashRouter>
     </div>
     ):
-    ( <SignIn handleSubmit={handleSubmit} />)                       
+    ( 
+        <HashRouter>
+            <Routes>
+                <Route exact path="/" element={<SignIn handleSubmit={handleSubmit} />} />
+
+            </Routes>
+        
+       
+        </HashRouter>
+
+    )                       
     );
 }
 
