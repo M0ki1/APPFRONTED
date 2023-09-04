@@ -13,9 +13,15 @@ function TopNav(props) {
     setAnchorEl(null);
   };
 
+  const handleLogOut = () =>{
+    localStorage.setItem('token',"null");
+    window.location.reload();
+  }
+
   return (
     <Box className={"BoxNav"}>
       <Container sx={{ width: '100%', height: '85px', position: 'fixed', top: 0, left: 0 }}>
+      
         <p className={"AppName"}>Travel Log</p>
         <Button
           id="profile-button"
@@ -28,7 +34,12 @@ function TopNav(props) {
           <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" left={0} position={"absolute"} />
 
         </Button>
-
+          <Button variant="outlined" color="error"
+          sx={{ position: 'absolute', top: '16px', right: '1px', marginRight: '1px' }}
+          onClick={handleLogOut}
+          >
+            Log Out
+          </Button>
         <Menu
           id="profile-menu"
           spacing={2}

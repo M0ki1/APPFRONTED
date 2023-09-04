@@ -21,7 +21,12 @@ let base64 = require('base-64');
 
 
 function App() {
-    const isAuthenticated = localStorage.getItem("token") !== null;
+    console.log("Estoy dandolo todo")
+    const isAuthenticated = localStorage.getItem("token") !== "null";
+    console.log(isAuthenticated);
+    console.log(localStorage.getItem("token"));
+    console.log(localStorage.getItem("token")!=="null");
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -75,15 +80,7 @@ function App() {
     </div>
     ):
     ( 
-        <HashRouter>
-            <Routes>
-                <Route exact path="/" element={<SignIn handleSubmit={handleSubmit} />} />
-
-            </Routes>
-        
-       
-        </HashRouter>
-
+        <SignIn handleSubmit={handleSubmit} />
     )                       
     );
 }

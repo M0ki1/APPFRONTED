@@ -13,7 +13,7 @@ import {
     InMemoryCache
 } from '@apollo/client';
  
-let AUTH = localStorage.getItem("token" || null) ;
+let AUTH = localStorage.getItem("token" || "null") ;
 
 //This function sets the headers for authentication every time using the bearer token
 const authLink = setContext((_, {headers}) => {
