@@ -4,6 +4,14 @@ import { Link } from "react-router-dom";
 import {Button, Chip, Container} from "@mui/material";
 import placeholder from "./placeholder.png";
 import TripPage from "../../TripPage";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
+
+
 
 function TripCard({trip}) {
     const myImageStyle = { width: '75%',objectFit: 'contain' };
@@ -29,21 +37,25 @@ function TripCard({trip}) {
   return (
 
     <Container sx = {{ pt:2}} >
-                <div className="trip-card" >
-
-                    <div className="trip-card__image">
-                        <img style={myImageStyle} src={placeholder}  alt={'placeholder'}/>
-                    </div>
-                    <div className="trip-card__content">
-                        <h3 className="TitleStyle">{trip?.name}</h3>
-                        <p className="SubtitleStyle">
-                            {trip?.description}
-                        </p>
-
-                        <Chip className={"Chip"}     label={chipText} color={chipColor} right={0} />
-
-                    </div>
-                </div>
+        <ImageListItem key={placeholder}>
+          <img
+            src={placeholder}
+            alt={"placeholder"}
+            loading="lazy"
+          />
+          <ImageListItemBar
+            title={trip?.name}
+            subtitle={trip?.description}
+            actionIcon={
+              <IconButton
+                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                aria-label={`info about ${trip?.name}`}
+              >
+                <InfoIcon />
+              </IconButton>
+            }
+          />
+        </ImageListItem>
     </Container>
   );
 }
