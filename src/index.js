@@ -12,17 +12,15 @@ import {
     createHttpLink,
     InMemoryCache
 } from '@apollo/client';
-import {AUTH_TOKEN} from "./constants";
-import SignIn from './components/SignIn/SignIn'
  
-
+let AUTH = localStorage.getItem("token" || null) ;
 
 //This function sets the headers for authentication every time using the bearer token
 const authLink = setContext((_, {headers}) => {
     return {
         headers: {
             ...headers,
-            Authorization: `Bearer ${AUTH_TOKEN}`,
+            Authorization: `Bearer ${AUTH}`,
             // accessControlAllowOrigin: '*',
             // accessControlAllowHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
         }
@@ -45,26 +43,19 @@ const client = new ApolloClient({
     },),
 });
 
-const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const payload = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-    
-  };
+
+
 
 
 //Aqui trabajamos el root
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 root.render(
+
     <ApolloProvider client={client}>
+
     <ThemeProvider theme={theme}>
         {/* <CssBaseline /> */}
-
-            <SignIn handleSubmit={handleSubmit}/>
+            <App/>
 
     </ThemeProvider>
     </ApolloProvider>

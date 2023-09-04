@@ -1,1 +1,1 @@
-export const AUTH_TOKEN = 'b6cfc5cafebbf7502db341817a3e0bc2';
+export var AUTH_TOKEN = 'b6cfc5cafebbf7502db341817a3e0bc2';
