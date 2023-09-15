@@ -114,7 +114,6 @@ function MapPage(props) {
                     Back to Trips
                 </Button> */}
                 <MyMapComponent isMarkerShown/>
-            {/* </div> */}
         </Container>
     );
 }
