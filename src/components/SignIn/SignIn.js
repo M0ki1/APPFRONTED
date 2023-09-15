@@ -76,7 +76,7 @@ function SignIn() {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h6">
+        <Typography component="h1" variant="h6" sx={{fontSize:50, border:1, borderRadius:2, paddingLeft: 2, paddingRight: 2}}>
           Sign in
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -104,10 +104,16 @@ function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            sx={{
+              "& .MuiInputBase-input:focus": {
+                borderColor: "#2D9BF0",
+              },
+            }}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
+            sx={{color:"white"}}
           />
           <Button
             type="submit"
@@ -119,12 +125,13 @@ function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="#" variant="body2"
+              sx={{color: "white",  border: 1, borderRadius: 1, p: 1, backgroundColor:"#2D9BF0"}}>
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="#" variant="body2" sx={{color: "white",  border: 1, borderRadius: 1, p: 1, backgroundColor:"#2D9BF0"}}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
