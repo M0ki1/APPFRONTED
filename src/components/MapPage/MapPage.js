@@ -1,6 +1,6 @@
 // MapPage
 
-import React, { Component } from 'react';
+import React, { Component,useState,useEffect } from 'react';
 import {compose, withProps } from "recompose"
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -15,11 +15,7 @@ import {
     Marker
   } from "react-google-maps";
 
-const Item = styled(Paper)(({ theme }) => ({
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.primary,
-}));
+
 
 const api_key = process.env.REACT_APP_GAPI_KEY
 
@@ -45,6 +41,10 @@ const MyMapComponent = compose(
 ));
 
 function MapPage(props) {
+    const [isLoading,setIsLoading] = useState(true);
+    if (isLoading) return(
+        <SpinnerOfDoom/>
+    )
     return (
         <Container direction="column"
             justifyContent="flex-start"
