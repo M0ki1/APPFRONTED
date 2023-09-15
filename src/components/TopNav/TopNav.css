@@ -9,7 +9,7 @@
 .BoxNav{
                  width: 100%;
                  height: 85px;
-                 background-color: rgba(162, 250, 163, 0.9);
+                 background-color: #F6BAC2;
                  flex-direction: column;
                  display: flex;
                  position: fixed;
@@ -33,11 +33,10 @@
                             margin-right: 17px;
                             position: absolute;
     right: 0;
-    font-family: cursive;
-    font-style: italic;
-    font-weight: bolder;
-    font-size: 27px;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    font-style: normal;
+    font-size: 35px;
     line-height: 50px;
-    color: #0470a6;
+    color: #FFFFFF;
     text-align: center;
                         }
