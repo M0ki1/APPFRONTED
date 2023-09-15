@@ -34,12 +34,7 @@ function TopNav(props) {
           <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" left={0} position={"absolute"} />
 
         </Button>
-          <Button variant="outlined" color="error"
-          sx={{ position: 'absolute', top: '16px', right: '1px', marginRight: '1px' }}
-          onClick={handleLogOut}
-          >
-            Log Out
-          </Button>
+
         <Menu
           id="profile-menu"
           spacing={2}
@@ -53,7 +48,7 @@ function TopNav(props) {
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>Settings</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          <MenuItem onClick={handleLogOut}>Logout</MenuItem>
         </Menu>
 
       </Container>

@@ -51,7 +51,7 @@ function App() {
             })
             .then(data => {
                 localStorage.setItem("token",data.token);
-                window.location.href = "/trips";
+                window.location.href = "";
                 
 
             })
