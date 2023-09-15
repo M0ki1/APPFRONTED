@@ -1,6 +1,8 @@
 // MapPage
 
 import React, { Component } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import {compose, withProps } from "recompose"
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -26,26 +28,47 @@ const api_key = process.env.REACT_APP_GAPI_KEY
 
 
 
-const MyMapComponent = compose(
-  withProps({
-    googleMapURL:
-      `https://maps.googleapis.com/maps/api/js?key=${api_key}`,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />
-  }),
-  withScriptjs,
-  withGoogleMap
-)(props => (
-  <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
-    {props.isMarkerShown && (
-      <Marker position={{ lat: -34.397, lng: 150.644 }} />
-    )}
-  </GoogleMap>
-));
+
+
 
 function MapPage(props) {
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+
+    useEffect(() => {
+      navigator.geolocation.getCurrentPosition(
+          (position) => {
+              setLatitude(position.coords.latitude);
+              setLongitude(position.coords.longitude);
+              console.log(position.coords.latitude);
+              console.log(position.coords.longitude);
+          },
+          (error) => {
+              console.log(error);
+          }
+      );
+  }, []);
+
+  const MyMapComponent = compose(
+    withProps({
+      googleMapURL:
+        `https://maps.googleapis.com/maps/api/js?key=${api_key}`,
+      loadingElement: <div style={{ height: `100%` }} />,
+      containerElement: <div style={{ height: `400px` }} />,
+      mapElement: <div style={{ height: `100%` }} />
+    }),
+    withScriptjs,
+    withGoogleMap
+  )(props => (
+    <GoogleMap defaultZoom={8} defaultCenter={{ lat: latitude, lng: longitude}}>
+      {props.isMarkerShown && (
+        <Marker position={{ lat: latitude, lng: longitude }} />
+      )}
+    </GoogleMap>
+  ));
+    
     return (
+        
         <Container direction="column"
             justifyContent="flex-start"
             alignItems="center"

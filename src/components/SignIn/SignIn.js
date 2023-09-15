@@ -48,7 +48,8 @@ function SignIn() {
         })
         .then(data => {
             localStorage.setItem("token",data.token);
-            navigate('/trips')
+            navigate('/trips');
+            window.location.reload();
             //here
             
 
@@ -89,11 +90,7 @@ function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
-            sx={{
-              "& .MuiInputBase-input:focus": {
-                borderColor: "#2D9BF0",
-              },
-            }}
+            
           />
           <TextField
             margin="normal"
@@ -104,16 +101,12 @@ function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
-            sx={{
-              "& .MuiInputBase-input:focus": {
-                borderColor: "#2D9BF0",
-              },
-            }}
+            
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-            sx={{color:"white"}}
+            
           />
           <Button
             type="submit"

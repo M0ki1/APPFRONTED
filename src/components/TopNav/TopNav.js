@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import './TopNav.css';
+import {useNavigate} from "react-router-dom";
 import { Avatar, Box, Button, Container, Menu, MenuItem } from "@mui/material";
 import { Rectangle } from "@mui/icons-material";
 
 function TopNav(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -15,7 +17,9 @@ function TopNav(props) {
 
   const handleLogOut = () =>{
     localStorage.setItem('token',"null");
+    navigate('/');
     window.location.reload();
+    
   }
 
   return (

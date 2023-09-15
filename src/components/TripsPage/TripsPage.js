@@ -10,12 +10,15 @@ import { generatePath, useNavigate } from "react-router-dom";
 import { useScrollDirection } from 'react-use-scroll-direction'
 import { CurrencyBitcoin } from '@mui/icons-material';
 
+
 const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.primary,
 
 }));
+
+
 
 let email = "admin@admin.com"
 
@@ -71,7 +74,8 @@ function TripsPage(props, { email }) {
     return (
         <>
             <div className={"GroupStack"} >
-                <Fab color="primary" aria-label="add" className={"NewTripFab"} id={"NewTrip"} variant={ext}>
+            type="submit"
+            <Fab  aria-label="add" className={"NewTripFab"} id={"NewTrip"} variant={ext} sx={{backgroundColor:"#2D9BF0"}}>
                     <AddIcon /> <div id={"NewTripText"} >{nt}</div>
                 </Fab>
 
