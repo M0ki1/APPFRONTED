@@ -8,11 +8,22 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import {useNavigate} from "react-router-dom";
+import { makeStyles } from "@mui/styles";
+import backgroundImage from "./background.png";
 let base64 = require('base-64');
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    minHeight: "100vh", // Ensure the container covers the entire viewport height
+  },
+}));
 
 function SignIn() {
-
+  const classes = useStyles();
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -49,7 +60,10 @@ function SignIn() {
 }
   
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main" maxWidth="6000px" className={classes.container} sx={{
+      paddingTop: 15,
+      paddingBottom: 15,
+    }}>
       <Box
         sx={{
           boxShadow: 3,
@@ -62,7 +76,7 @@ function SignIn() {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h6">
           Sign in
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -75,6 +89,11 @@ function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            sx={{
+              "& .MuiInputBase-input:focus": {
+                borderColor: "#2D9BF0",
+              },
+            }}
           />
           <TextField
             margin="normal"
@@ -94,7 +113,7 @@ function SignIn() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, backgroundColor: "#2D9BF0", color: "white" }}
           >
             Sign In
           </Button>
