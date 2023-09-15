@@ -2,10 +2,7 @@
 
 import React, { Component,useState,useEffect } from 'react';
 import {compose, withProps } from "recompose"
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import {Box, Container, CssBaseline, Paper, Stack, styled} from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2";
 import CircularProgress from "@mui/material/CircularProgress";
 import SpinnerOfDoom from "../HomePage/SpinnerOfDoom";
 import {
@@ -41,10 +38,7 @@ const MyMapComponent = compose(
 ));
 
 function MapPage(props) {
-    const [isLoading,setIsLoading] = useState(true);
-    if (isLoading) return(
-        <SpinnerOfDoom/>
-    )
+   
     return (
         <Container direction="column"
             justifyContent="flex-start"
@@ -52,9 +46,7 @@ function MapPage(props) {
             spacing={2}
             sx={{ mx: 2, mt: '90px' }}
             >
-            {/* <div style={{ height: '100vh', width: '100%' }} > */}
                 <MyMapComponent isMarkerShown/>
-            {/* </div> */}
         </Container>
     );
 }
