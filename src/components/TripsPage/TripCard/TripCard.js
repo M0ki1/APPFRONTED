@@ -3,6 +3,7 @@ import './TripCard.css';
 import { Link } from "react-router-dom";
 import {Button, Chip, Container} from "@mui/material";
 import placeholder from "./placeholder.png";
+import tripImage from "./tripImage.webp";
 import TripPage from "../../TripPage";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -37,9 +38,9 @@ function TripCard({trip}) {
   return (
 
     <Container sx = {{ pt:2}} >
-        <ImageListItem key={placeholder}>
+        <ImageListItem key={tripImage}>
           <img
-            src={placeholder}
+            src={tripImage}
             alt={"placeholder"}
             loading="lazy"
           />
