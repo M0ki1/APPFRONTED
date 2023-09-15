@@ -13,6 +13,7 @@ import FriendsPage from "./components/FriendsPage/FriendsPage";
 import MapPage from "./components/MapPage/MapPage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import SignIn from './components/SignIn/SignIn'
+import TripPage from './components/TripPage/TripPage'
 
 
 
@@ -38,11 +39,12 @@ function App() {
             <div className="App__content">
                 <TopNav />
                     <Routes>
-                        <Route exact path="/" element={<HomePage />} />
+                        <Route exact path="/" element={<TripPage />} />
                         <Route exact path="/trips" element={<TripsPage />} />
                         <Route exact path="/friends" element={<FriendsPage />} />
                         <Route exact path="/map" element={<MapPage />} />
                         <Route exact path="/search" element={<SearchPage />} />
+                        <Route path="/trip/:tripId" element={<TripPage />} />
                     </Routes>
             </div>
         </div>
