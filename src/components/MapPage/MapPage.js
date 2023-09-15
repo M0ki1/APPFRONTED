@@ -4,7 +4,8 @@ import React, { Component,useState,useEffect } from 'react';
 import {compose, withProps } from "recompose"
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import {Box, Container, CssBaseline, Paper, Stack, styled} from "@mui/material";
+import {Box, Button, Container, CssBaseline, Paper, Stack, styled} from "@mui/material";
+import TextField from "@mui/material/TextField";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import CircularProgress from "@mui/material/CircularProgress";
 import SpinnerOfDoom from "../HomePage/SpinnerOfDoom";
@@ -43,12 +44,42 @@ function MapPage(props) {
       );
   }, []);
 
+    const ResetLocation = () => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+        },
+        (error) => {
+            console.log(error);
+        }
+    );
+    }
+
+    const SearchLocation = (event) => {
+      event.preventDefault();
+      const data = document.getElementById("outlined-basic");
+      console.log(data.value);
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${data.value}&key=${api_key}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setLatitude(data.results[0].geometry.location.lat);
+        setLongitude(data.results[0].geometry.location.lng);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+      
+    }
+
   const MyMapComponent = compose(
     withProps({
       googleMapURL:
         `https://maps.googleapis.com/maps/api/js?key=${api_key}`,
       loadingElement: <div style={{ height: `100%` }} />,
-      containerElement: <div style={{ height: `400px` }} />,
+      containerElement: <div style={{ height: `80vh` }} />,
       mapElement: <div style={{ height: `100%` }} />
     }),
     withScriptjs,
@@ -74,6 +105,14 @@ function MapPage(props) {
             sx={{ mx: 2, mt: '90px' }}
             >
             {/* <div style={{ height: '100vh', width: '100%' }} > */}
+                <TextField id="outlined-basic" label="Search" variant="outlined" />
+                <Button variant="contained" color="primary" onClick={SearchLocation}>
+                    Search
+                </Button>
+                
+                {/* <Button variant="contained" color="primary" onClick={ResetLocation}>
+                    Back to Trips
+                </Button> */}
                 <MyMapComponent isMarkerShown/>
             {/* </div> */}
         </Container>
