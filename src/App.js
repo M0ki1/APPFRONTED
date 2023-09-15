@@ -39,7 +39,7 @@ function App() {
             <div className="App__content">
                 <TopNav />
                     <Routes>
-                        <Route exact path="/" element={<TripPage />} />
+                        <Route exact path="/" element={<HomePage />} />
                         <Route exact path="/trips" element={<TripsPage />} />
                         <Route exact path="/friends" element={<FriendsPage />} />
                         <Route exact path="/map" element={<MapPage />} />
