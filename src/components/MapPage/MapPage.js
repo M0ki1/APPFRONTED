@@ -20,6 +20,57 @@ import {
 } from 'react-google-maps';
 
 const api_key = process.env.REACT_APP_GAPI_KEY;
+const CoorSearchBar = ({ onCoorSearch }) => {
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+
+  const handleLatitudeChange = (event) => {
+    setLatitude(event.target.value);
+  };
+
+  const handleLongitudeChange = (event) => {
+    setLongitude(event.target.value);
+  };
+
+  const handleSearchClick = () => {
+    onCoorSearch(latitude, longitude);
+  };
+
+  return (
+    <Grid container spacing={2} alignItems="center">
+      <Grid item xs={4}>
+        <TextField
+          id="outlined-basic"
+          label="Latitude"
+          variant="outlined"
+          fullWidth
+          value={latitude}
+          onChange={handleLatitudeChange}
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <TextField
+          id="outlined-basic"
+          label="Longitude"
+          variant="outlined"
+          fullWidth
+          value={longitude}
+          onChange={handleLongitudeChange}
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSearchClick}
+          fullWidth
+        >
+          Search
+        </Button>
+      </Grid>
+    </Grid>
+  );
+};
 
 const SearchBar = ({ onSearch, onSearchCurrentLocation }) => {
   const [search, setSearch] = useState('');
@@ -84,6 +135,11 @@ function MapPage(props) {
     );
   }, []);
 
+  const onCoorSearch = (latitude, longitude) => {
+    setLatitude(parseFloat(latitude));
+    setLongitude(parseFloat(longitude));
+  }
+
   const onSearch = (location) => {
     fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${api_key}`
@@ -135,6 +191,7 @@ function MapPage(props) {
       sx={{ mx: 2, mt: '90px' }}
     >
       <SearchBar onSearch={onSearch} onSearchCurrentLocation={onSearchCurrentLocation} />
+      <CoorSearchBar onCoorSearch={onCoorSearch} />
       <MyMapComponent isMarkerShown />
     </Container>
   );
