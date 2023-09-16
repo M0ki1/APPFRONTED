@@ -14,6 +14,7 @@ import MapPage from "./components/MapPage/MapPage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import SignIn from './components/SignIn/SignIn'
 import TripPage from './components/TripPage/TripPage'
+import DestinationForm from './components/DestinationForm/DestinationFrom';
 
 
 
@@ -45,6 +46,8 @@ function App() {
                         <Route exact path="/map" element={<MapPage />} />
                         <Route exact path="/search" element={<SearchPage />} />
                         <Route path="/trip/:tripId" element={<TripPage />} />
+                        <Route path="/trip/:tripId/destination" element={<DestinationForm />} />
+
                     </Routes>
             </div>
         </div>

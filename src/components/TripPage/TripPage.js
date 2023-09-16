@@ -1,8 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { Box, Typography, CircularProgress, Paper, styled } from '@mui/material';
+import { Box, Typography, CircularProgress, Paper, styled, Button } from '@mui/material';
 import Container from '@mui/material/Container'
 
 const GET_TRIP_DETAILS = gql`
@@ -34,6 +34,7 @@ const Image = styled('img')({
 
 function TripPage() {
   const { tripId } = useParams();
+  const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_TRIP_DETAILS, {
     variables: { tripId },
   });
@@ -52,7 +53,7 @@ function TripPage() {
   }
 
   const trip = data.trip;
-
+  console.log(trip)
   return (
     <Container 
     direction="column"
@@ -69,6 +70,9 @@ function TripPage() {
       <Typography variant="body1">
         End Date: {new Date(trip.endDate).toLocaleDateString()}
       </Typography>
+      <Button variant="contained" color="primary" onClick={()=>navigate(`/trip/${trip.id}/destination`)}>
+        Add Destination
+        </Button>
 
       {/* <ImageContainer>
         {trip.images.map((image, index) => (
