@@ -20,6 +20,7 @@ import {
 } from 'react-google-maps';
 
 const api_key = process.env.REACT_APP_GAPI_KEY;
+
 const CoorSearchBar = ({ onCoorSearch }) => {
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
@@ -122,6 +123,7 @@ const SearchBar = ({ onSearch, onSearchCurrentLocation }) => {
 function MapPage(props) {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [markers, setMarkers] = useState([]); // State variable for markers
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -138,7 +140,7 @@ function MapPage(props) {
   const onCoorSearch = (latitude, longitude) => {
     setLatitude(parseFloat(latitude));
     setLongitude(parseFloat(longitude));
-  }
+  };
 
   const onSearch = (location) => {
     fetch(
@@ -155,6 +157,8 @@ function MapPage(props) {
       });
   };
 
+  
+
   const onSearchCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -167,6 +171,19 @@ function MapPage(props) {
     );
   };
 
+  const addMarker = () => {
+    setMarkers((markers) => [
+      ...markers,
+      { lat: latitude, lng: longitude },
+    ]);
+  };
+
+  const clearMarkers = () => {
+    setMarkers([]);
+  };
+
+  
+
   const MyMapComponent = compose(
     withProps({
       googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${api_key}`,
@@ -178,7 +195,10 @@ function MapPage(props) {
     withGoogleMap
   )((props) => (
     <GoogleMap defaultZoom={8} defaultCenter={{ lat: latitude, lng: longitude }}>
-      {props.isMarkerShown && <Marker position={{ lat: latitude, lng: longitude }} />}
+      {props.isMarkerShown &&
+        markers.map((marker, index) => (
+          <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }} />
+        ))}
     </GoogleMap>
   ));
 
@@ -190,8 +210,31 @@ function MapPage(props) {
       spacing={2}
       sx={{ mx: 2, mt: '90px' }}
     >
-      <SearchBar onSearch={onSearch} onSearchCurrentLocation={onSearchCurrentLocation} />
+      <SearchBar
+        onSearch={onSearch}
+        onSearchCurrentLocation={onSearchCurrentLocation}
+      />
       <CoorSearchBar onCoorSearch={onCoorSearch} />
+      <Grid item xs={2}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={addMarker}
+          fullWidth
+        >
+          Add Location
+        </Button>
+      </Grid>
+      <Grid item xs={2}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={clearMarkers}
+          fullWidth
+        >
+          Clear Markers
+        </Button>
+      </Grid>
       <MyMapComponent isMarkerShown />
     </Container>
   );
