@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './TopNav.css';
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import { Avatar, Box, Button, Container, Menu, MenuItem } from "@mui/material";
 import { Rectangle } from "@mui/icons-material";
 
@@ -20,6 +20,10 @@ function TopNav(props) {
     navigate('/');
     window.location.reload();
     
+  }
+
+  const handleProfile = () =>{
+    navigate('/profile');
   }
 
   return (
@@ -50,7 +54,7 @@ function TopNav(props) {
           }}
 
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleProfile}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>Settings</MenuItem>
           <MenuItem onClick={handleLogOut}>Logout</MenuItem>
         </Menu>
