@@ -15,6 +15,7 @@ import SearchPage from "./components/SearchPage/SearchPage";
 import SignIn from './components/SignIn/SignIn'
 import TripPage from './components/TripPage/TripPage'
 import DestinationForm from './components/DestinationForm/DestinationFrom';
+import Profile from './components/Profile/Profile';
 
 
 
@@ -41,6 +42,7 @@ function App() {
                 <TopNav />
                     <Routes>
                         <Route exact path="/" element={<HomePage />} />
+                        <Route exact path="/profile" element={<Profile />} />
                         <Route exact path="/trips" element={<TripsPage />} />
                         <Route exact path="/friends" element={<FriendsPage />} />
                         <Route exact path="/map" element={<MapPage />} />
