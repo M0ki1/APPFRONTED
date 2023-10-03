@@ -2,7 +2,7 @@ import './App.css';
 import {
     HashRouter,
     Route,
-    Routes,
+    Routes,  
 } from "react-router-dom";
 import React from "react";
 import TripsPage from "./components/TripsPage";
