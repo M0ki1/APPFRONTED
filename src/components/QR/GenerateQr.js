@@ -10,22 +10,39 @@ const GenerateQr = () => {
   const apiUrl = BACK_URL + '/api/v1/Qrcode';
   // Lógica para obtener el token de amistad del backend
   useEffect(() => {
+
     const headers = {
         Authorization: `Bearer ${AUTH}`,
       };
     // Realiza una solicitud HTTP al backend para obtener el token de amistad
-    fetch(apiUrl, {
-      headers, // Agrega los encabezados con el token de autorización
-    })
+    const fetchQRCodeData =  () =>{
+     
+      fetch(apiUrl, {
+        headers, // Agrega los encabezados con el token de autorización
+        
+      })
       .then((response) => response.blob())
       .then((blob) => {
         const qrImageURL = URL.createObjectURL(blob);
         setQrImage(qrImageURL);
+        // alert('cambiado')
       })
       .catch((error) => {
+        alert(error)
         console.error('Error al obtener el código QR:', error);
       });
+    }
+    fetchQRCodeData();
+
+    const intervalId = setInterval(()=>{
+      fetchQRCodeData();
+    },60000)
+
+    return () => clearInterval(intervalId)
+
   }, [AUTH,apiUrl]);
+
+
 
   return (
     <Container 
