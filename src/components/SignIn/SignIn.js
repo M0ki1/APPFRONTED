@@ -11,6 +11,7 @@ import {useNavigate} from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import backgroundImage from "./background.png";
 let base64 = require('base-64');
+import { BACK_URL } from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -32,7 +33,7 @@ function SignIn() {
         email: data.get("email"),
         password: data.get("password"),
     };
-    fetch("http://localhost:3000/api/v1/api-keys", {
+    fetch(BACK_URL+"/api/v1/api-keys", {
             method: "post",
             headers: new Headers({
                 "Authorization": `Basic ${base64.encode(`${payload.email}:${payload.password}`)}`
