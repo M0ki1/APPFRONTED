@@ -10,8 +10,8 @@ import Container from "@mui/material/Container";
 import {useNavigate} from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import backgroundImage from "./background.png";
-let base64 = require('base-64');
 import { BACK_URL } from "../../constants";
+let base64 = require('base-64');
 
 const useStyles = makeStyles((theme) => ({
   container: {
